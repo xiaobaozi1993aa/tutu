@@ -11,15 +11,12 @@ import redis
 
 
 def common_db():
-    db = pymysql.Connect('drdsbggaj9sk0176public.drds.aliyuncs.com',
-                         'mytutu',
-                         'dev_java_mytutu_130532',
-                         'mytutu')
+    db = pymysql.Connect()
     cursor = db.cursor()
     return db,cursor
 
 def common_rd():
-    pool = redis.ConnectionPool(host='172.16.38.134', port=6379, password='130532Zzre', db=0)
+    pool = redis.ConnectionPool()
     r = redis.Redis(connection_pool=pool)
     return r
 

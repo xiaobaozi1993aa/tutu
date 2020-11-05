@@ -22,7 +22,7 @@ def print_func(func):
 
 # 域名
 # 测试
-ceshi_host = 'https://m-dev.meiyintutu.com'
+ceshi_host = ''
 # 生产
 shengchan_host = 'https://m.meiyintutu.com'
 
