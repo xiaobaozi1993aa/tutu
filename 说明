@@ -1,0 +1,71 @@
+@versoin:V-1.8.0
+@author:xiaobao
+@time:2020年9月1日
+
+Common                    公共方法模块
+
+Common_Conf.py            自定义的解释器，域名，日志路径，excel路径
+Common_Db.py              mysql,redis简单封装
+Common_Excel              Excel行数，列数获取简单封装
+Common_gol.py             全局变量封装提取
+Common_Headers.py         请求头及token获取封装
+Common_Log.py             日志模块封装
+Common_Monthd.py          请求方式封装，包含get和post
+Common_Rd.py              请求头随机数和时间戳获取
+Common_unittest.py        框架初始化条件封装
+
+
+Meiyin——Report            报告模块
+HTMLTestRunner.py         报告插件
+
+
+Test_Case                 用例管理
+
+Address                   地址相关
+test_address.py           添加地址
+test_get_addid.py         获取地址ID
+test_delete_address.py    删除地址
+
+Agent                     代理相关
+test_bindagent            绑定上级
+test_getagenid            获取上级userID
+test_remove_agent         解除绑定关系
+
+Person                    个人相关
+test_code.py              验证码验证
+test_sign.py              签到
+test_person.py            更换头像
+test_getmessage.py        获取消息列表
+test_search.py            搜索
+
+Money
+test_getmoney.py          余额/兔币/红包/卡券查询
+test_sure_charges.py      确认佣金
+
+Order                     订单相关
+test_creatorder.py        创建订单
+test_buy_order.py         获取支付ID
+test_cancel_order.py      取消/删除未支付订单
+test_pay_order.py         订单支付
+test_cancel_pay_order.py  取消/删除已支付订单
+
+Picture                   图片相关
+test_creat_picture.py     创建相册
+test_delete_picture.py    置顶，删除相册
+test_save_image.py        上传图片
+
+Pageone                   首页
+test_get_buyorder.py      随机弹出购买信息
+test_get_shop.py          获取店铺信息
+
+test_login.py             登录
+。。。
+
+Test_Data                 接口数据管理
+
+Tool                      插件/工具
+qiege.py                  url域名，路径，参数获取
+get_r_time.py             获取响应时间写入excel/错误率统计
+
+rtime_demo.py             响应时间网页展示
+run.py                    运行文件

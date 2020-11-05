@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>美印兔兔接口响应数据展示</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://www.uusucai.com/d/file/png/2015/06/21/d12098f6a78438d06f3d2f72c5d5efce.png"/>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/china.js"></script>
+</head>
+<body>
+    <div id="1" style="width:1500px; height:600px;position:absolute;top:00px;left:-100px"></div>
+    <script>
+        var chart1 = echarts.init(document.getElementById('1'), 'white', {renderer: 'canvas'});
+
+        $(
+            function () {
+                fetchData1(chart1);
+                setInterval(fetchData1, 20000);       <!--更新时间间隔 -->
+            }
+        );
+
+        function fetchData1() {
+            $.ajax({
+                type: "GET",
+                url: "http://192.168.2.156:5001/lineChart",
+                dataType: 'json',
+                success: function (result) {
+                    chart1.setOption(result);
+                }
+            });
+        }
+    </script>
+    <div id="2" style="width:350px; height:280px;position:absolute;top:00px;left:1400px"></div>
+    <script>
+        var chart2 = echarts.init(document.getElementById('2'), 'white', {renderer: 'canvas'});
+
+        $(
+            function () {
+                fetchData2(chart2);
+                setInterval(fetchData2, 20000);       <!--更新时间间隔 -->
+            }
+        );
+
+        function fetchData2() {
+            $.ajax({
+                type: "GET",
+                url: "http://192.168.2.156:5001/pieChart",
+                dataType: 'json',
+                success: function (result) {
+                    chart2.setOption(result);
+                }
+            });
+        }
+    </script>
+    <div id="3" style="width:500px; height:300px;position:absolute;top:620px;left:00px"></div>
+    <script>
+        var chart3 = echarts.init(document.getElementById('3'), 'white', {renderer: 'canvas'});
+
+        $(
+            function () {
+                fetchData3(chart3);
+                setInterval(fetchData3, 20000);       <!--更新时间间隔 -->
+            }
+        );
+
+        function fetchData3() {
+            $.ajax({
+                type: "GET",
+                url: "http://192.168.2.156:5001/barChart",
+                dataType: 'json',
+                success: function (result) {
+                    chart3.setOption(result);
+                }
+            });
+        }
+    </script>
+    <div id="4" style="width:500px; height:300px;position:absolute;top:620px;left:520px"></div>
+    <script>
+        var chart4 = echarts.init(document.getElementById('4'), 'white', {renderer: 'canvas'});
+
+        $(
+            function () {
+                fetchData4(chart4);
+                setInterval(fetchData4, 20000);       <!--更新时间间隔 -->
+            }
+        );
+
+        function fetchData4() {
+            $.ajax({
+                type: "GET",
+                url: "http://192.168.2.156:5001/bar1Chart",
+                dataType: 'json',
+                success: function (result) {
+                    chart4.setOption(result);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
