@@ -11,12 +11,12 @@ import redis
 
 
 def common_db():
-    db = pymysql.Connect()
+    db = pymysql.Connect(1)
     cursor = db.cursor()
     return db,cursor
 
 def common_rd():
-    pool = redis.ConnectionPool()
+    pool = redis.ConnectionPool(1)
     r = redis.Redis(connection_pool=pool)
     return r
 
