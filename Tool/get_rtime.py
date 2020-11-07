@@ -7,15 +7,15 @@
 @time:2020年9月17日
 '''
 
-import time,re
+import time,re,os
 from Common.Common_Excel import get_nrows,get_xls
 from Common.Common_Conf import expath
 from Common.Common_Log import MeiyinLog
 from collections import Counter
-
+from Common.Common_Conf import path
 logger = MeiyinLog().get_log()
 
-path = "H:\\美印\\tt_log\\"
+# path = "H:\\美印\\tt_log\\"
 name =  time.strftime("%Y_%m_%d_")+'test'+'.log'
 file = path+name
 # 筛选列表
@@ -49,8 +49,10 @@ def add_errnum():
     errlist = []
     alllist = []
     try:
-        with open(file, 'r',encoding='utf-8') as f:
-            for lines in f.readlines():
+        subdir = os.listdir(path)
+        for f in subdir: # 遍历文件夹下的文件
+            text = open(path+f, 'r', encoding='utf-8')
+            for lines in text.readlines():
                 lines = lines.replace("\n", "").split(",")
                 if 'ERROR' in str(lines):
                     if 'test_' in str(lines):
@@ -59,11 +61,12 @@ def add_errnum():
                     linelist.append(lines)
                 if '接口运行完毕' in str(lines):
                     alllist.append(lines)
-            num = Counter(errlist)
-            logger.info('报错个数:{},总接口数:{},运行次数:{}'.format(len(errlist),len(linelist),len(alllist)))
-            return len(errlist),len(linelist),len(alllist),dict(num)
+        num = Counter(errlist)
+        logger.info('报错个数:{},总接口数:{},运行次数:{}'.format(len(errlist), len(linelist), len(alllist)))
+        return len(errlist), len(linelist), len(alllist), dict(num)
     except Exception as e:
-            logger.error(e)
+        logger.error(e)
+        pass
 
 if __name__ == '__main__':
     add_rtime()
