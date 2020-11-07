@@ -15,8 +15,6 @@ from collections import Counter
 
 logger = MeiyinLog().get_log()
 
-xlsc,shtc = get_xls()
-number = get_nrows()
 path = "H:\\美印\\tt_log\\"
 name =  time.strftime("%Y_%m_%d_")+'test'+'.log'
 file = path+name
@@ -26,8 +24,10 @@ portlist = ['usercenter/sign', 'editUserInfo','getMessageGroup','productSearch',
             ]
 
 def add_rtime():
+    xlsc, shtc = get_xls(0)
+    number = get_nrows(0)
     try:
-        with open(expath, 'r', encoding='utf-8') as f:
+        with open(file, 'r', encoding='utf-8') as f:
             for lines in f.readlines():
                 lines = lines.replace("\n", "").split(",")
                 if 'loginByPhone' in str(lines):
@@ -35,7 +35,6 @@ def add_rtime():
                     shtc.write(number, 0, a)
                     shtc.write(number, 1, lines[2])
                     xlsc.save(r'%s' % expath)
-
                 for i in portlist:
                     if i in str(lines):
                         b = portlist.index(i) + 2

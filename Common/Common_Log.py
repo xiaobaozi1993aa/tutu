@@ -8,9 +8,8 @@
 '''
 import logging
 import time
-from Common.Common_Conf import logpath
+from Common.Common_Conf import path
 import sys
-
 class MeiyinLog(object):
 
     def __init__(self,logger=None):
@@ -20,7 +19,7 @@ class MeiyinLog(object):
         self.logger.setLevel(logging.DEBUG)
         # 创建一个handler，用于写入日志文件
         self.log_time = time.strftime("%Y_%m_%d_")
-        self.log_path = logpath
+        self.log_path = path
         self.log_name = self.log_path + self.log_time + 'test.log'
 
     def get_log(self):
@@ -56,7 +55,7 @@ class MeiyinLog(object):
 
 
 class Logger(object):
-    def __init__(self, filename="%s" % logpath ):
+    def __init__(self, filename="%s" % path ):
         self.terminal = sys.stdout
         self.log = open(filename, "a")
 

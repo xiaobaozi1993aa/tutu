@@ -23,20 +23,17 @@ from Common.Common_Conf import expath
 # c = a.nrows
 # print(b,c)
 
-def get_xls():
+def get_xls(i):
     xls = xlrd.open_workbook(r'%s' % expath, formatting_info=True)
     xlsc = copy(xls)
-    shtc = xlsc.get_sheet(0)
+    shtc = xlsc.get_sheet(i)
     return xlsc,shtc
 
-def get_nrows():
+def get_nrows(i):
     xls = xlrd.open_workbook(r'%s' % expath)
-    a = xls.sheets()[0]
+    a = xls.sheets()[i]
     number = a.nrows
-    #print(number)
     return number
 
 if __name__ == '__main__':
-    get_xls()
-    get_nrows()
-
+    pass

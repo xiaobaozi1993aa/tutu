@@ -1,36 +1,49 @@
 import time
 from Common.Common_Excel import get_nrows,get_xls
-from Common.Common_Conf import expath
 from Common.Common_Log import MeiyinLog
+from collections import Counter
+import re
+from Common.Common_Conf import expath
+
 
 logger = MeiyinLog().get_log()
 
-xlsc,shtc = get_xls()
-number = get_nrows()
+
 path = "H:\\美印\\tt_log\\"
 name =  time.strftime("%Y_%m_%d_")+'test'+'.log'
 file = path+name
 # 筛选列表
-portlist = ['usercenter/sign', 'editUserInfo','getMessageGroup','productSearch',
-            'getProductInfo','checkCodeIsOk','getMineWallet','addAlbum','delAlbumBatch','editAddressNew',
-            ]
+def add_errnum():
+    xlsc, shtc = get_xls(1)
+    number = get_nrows(1)
+    linelist = []
+    errlist = []
+    alllist = []
+    try:
+        with open(file, 'r',encoding='utf-8') as f:
+            for lines in f.readlines():
+                lines = lines.replace("\n", "").split(",")
+                if 'ERROR' in str(lines):
+                    if 'test_' in str(lines):
+                        print(str(lines))
+                        b = (re.findall(r"] (.+?).py", str(lines))[0])
+                        shtc.write(number, 3, b)
 
-def add_rtime():
-    with open(file, 'r', encoding='utf-8') as f:
-        for lines in f.readlines():
-            lines = lines.replace("\n", "").split(",")
-            if 'loginByPhone' in str(lines):
-                a = str(lines)[3:22] + ',' + str(lines)[26:29]
-                shtc.write(number, 0, a)
-                shtc.write(number, 1, lines[2])
-                print(lines[2])
-                xlsc.save(r'%s' % expath)
+                if 'line:33' in str(lines):
+                    linelist.append(lines)
+                    shtc.write(number, 1, len(linelist))
 
-            for i in portlist:
-                if i in str(lines):
-                    b = portlist.index(i)+2
-                    shtc.write(number, b, lines[2])
-                    xlsc.save(r'%s' % expath)
-        logger.info('响应时间EXCEL保存完毕')
+                if '接口运行完毕' in str(lines):
+                    alllist.append(lines)
+                    shtc.write(number, 0, len(alllist))
+            xlsc.save(r'%s' % expath)
+            num = Counter(errlist)
+            #logger.info('报错个数:{},总接口数:{},运行次数:{}'.format(len(errlist),len(linelist),len(alllist)))
+            return len(errlist),len(linelist),len(alllist),dict(num)
+    except Exception as e:
+            logger.error(e)
 
-add_rtime()
+#总运行数	总接口数	日期	报错接口	次数	超时接口	次数
+
+if __name__ == '__main__':
+    add_errnum()

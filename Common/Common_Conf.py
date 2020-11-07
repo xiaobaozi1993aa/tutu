@@ -8,6 +8,8 @@
 '''
 from functools import wraps
 import datetime
+import datetime, os, time
+
 
 def print_func(func):
     @ wraps(func)
@@ -19,10 +21,24 @@ def print_func(func):
         return test_func
     return start_pr
 
+def get_log_time():
+    t_date=datetime.date.today()
+    week_day = t_date.strftime("%w")
+    name =  time.strftime("%Y_%m_%d")
+    path = "H:\\美印\\tt_log\\%s\\" % name
+    isExists = os.path.exists(path)
+    if int(week_day) == 6:
+        if not isExists:
+            os.makedirs(path)
+            #print(path + ' 创建成功')
+        else:
+            pass
+            #rint(path + ' 目录已存在')
+    return path
 
-# 域名
+path = get_log_time()
 # 测试
-ceshi_host = '1'
+ceshi_host = 'https://m-dev.meiyintutu.com'
 # 生产
 shengchan_host = 'https://m.meiyintutu.com'
 
@@ -37,3 +53,5 @@ logpath = "H:\\美印\\tt_log\\"
 
 #报告路径
 reportpath = "H:\\美印\\tt_report\\"
+
+
