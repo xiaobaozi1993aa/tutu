@@ -11,6 +11,17 @@ import datetime
 import datetime, os, time
 
 
+#excel路径
+expath = "H:\\美印\\tt_time\\time.xls"
+
+#日志路径
+logpath = "H:\\美印\\tt_log\\"
+
+#报告路径
+reportpath = "H:\\美印\\tt_report\\"
+
+
+
 def print_func(func):
     @ wraps(func)
     def start_pr(*args,**kwargs):
@@ -30,11 +41,13 @@ def get_log_time():
     if int(week_day) == 6:
         if not isExists:
             os.makedirs(path)
-            #print(path + ' 创建成功')
         else:
             pass
-            #rint(path + ' 目录已存在')
-    return path
+    else:
+        lists = os.listdir(logpath)
+        lists.sort(key=lambda fn: os.path.getmtime(logpath + "\\" + fn))
+        file_new = os.path.join(logpath, lists[-1])
+        return  file_new+'\\'
 
 path = get_log_time()
 # 测试
@@ -43,15 +56,4 @@ ceshi_host = 'https://m-dev.meiyintutu.com'
 shengchan_host = 'https://m.meiyintutu.com'
 
 host = shengchan_host
-
-
-#excel路径
-expath = "H:\\美印\\tt_log\\time.xls"
-
-#日志路径
-logpath = "H:\\美印\\tt_log\\"
-
-#报告路径
-reportpath = "H:\\美印\\tt_report\\"
-
 

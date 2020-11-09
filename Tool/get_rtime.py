@@ -15,7 +15,6 @@ from collections import Counter
 from Common.Common_Conf import path
 logger = MeiyinLog().get_log()
 
-# path = "H:\\美印\\tt_log\\"
 name =  time.strftime("%Y_%m_%d_")+'test'+'.log'
 file = path+name
 # 筛选列表
