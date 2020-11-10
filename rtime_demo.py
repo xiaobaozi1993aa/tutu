@@ -16,7 +16,7 @@ import xlrd
 from Tool.get_rtime import add_errnum,add_gtime
 from gevent import pywsgi
 from pyecharts.globals import ThemeType
-gtime_list = add_gtime()
+gtime_list,gtime_num = add_gtime()
 errnum,portnum,runnum,errnum_list = add_errnum()                #依次为报错总数，接口总数，运行次数,报错字典数据
 data = xlrd.open_workbook(r'%s' % expath)
 table = data.sheets()[0]
@@ -96,7 +96,10 @@ def line_base() -> Line:
 
 def pie_base() -> Pie:
     errlist = ['返回异常','超时异常','正常']
-    datalist = [errnum,2,portnum]
+    allport = errnum+gtime_num+portnum
+    datalist = [('%.2f' % (errnum/allport* 100.0)),
+                ('%.2f' % (gtime_num/allport* 100.0)),
+                ('%.2f' % (portnum/allport* 100.0))]
     pie = (
         Pie(init_opts=opts.InitOpts(chart_id=2))
         .add(

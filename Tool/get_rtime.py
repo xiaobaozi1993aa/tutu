@@ -77,8 +77,10 @@ def add_gtime():
             if float(ii) >= 0.1:
                 gtime_list.append((a.col_values(i))[0])
     num = Counter(gtime_list)
-    return dict(num)
+    logger.info('超时数据统计完毕,共:{}个'.format(len(gtime_list)))
+    return dict(num),len(gtime_list)
 
 if __name__ == '__main__':
     add_rtime()
     add_errnum()
+    add_gtime()
