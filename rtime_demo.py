@@ -13,10 +13,10 @@ from pyecharts.charts import Bar
 from Common.Common_Conf import expath
 from pyecharts import options as opts
 import xlrd
-from Tool.get_rtime import add_errnum
+from Tool.get_rtime import add_errnum,add_gtime
 from gevent import pywsgi
 from pyecharts.globals import ThemeType
-
+gtime_list = add_gtime()
 errnum,portnum,runnum,errnum_list = add_errnum()                #依次为报错总数，接口总数，运行次数,报错字典数据
 data = xlrd.open_workbook(r'%s' % expath)
 table = data.sheets()[0]
@@ -128,10 +128,12 @@ def bar_base() -> Bar:
     return bar
 
 def bar_base1() -> Bar:
+    port_name = list(gtime_list.keys())
+    port_num = list(gtime_list.values())
     bar = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.WALDEN, chart_id=4))
-            .add_xaxis([1,2,3])
-            .add_yaxis("超时排行", [1,6,12])
+            .add_xaxis(port_name)
+            .add_yaxis("超时排行", port_num)
             .set_colors(["#FFFF93"])
             .set_global_opts(title_opts=opts.TitleOpts(title="", subtitle=""),
                              # legend_opts=opts.LegendOpts(type_="scroll", pos_left="left", orient="vertical")     图表名称位置

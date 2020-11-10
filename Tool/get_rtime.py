@@ -7,7 +7,7 @@
 @time:2020年9月17日
 '''
 
-import time,re,os
+import time,re,os,xlrd
 from Common.Common_Excel import get_nrows,get_xls
 from Common.Common_Conf import expath
 from Common.Common_Log import MeiyinLog
@@ -65,7 +65,19 @@ def add_errnum():
         return len(errlist), len(linelist), len(alllist), dict(num)
     except Exception as e:
         logger.error(e)
-        pass
+
+def add_gtime():
+    gtime_list = []
+    xls = xlrd.open_workbook(expath)
+    a = xls.sheets()[0]
+    for i in range(1,11):
+        glist = (a.col_values(i))[1::]
+        new_glist = [i for i in glist if i != '']
+        for ii in new_glist:
+            if float(ii) >= 0.1:
+                gtime_list.append((a.col_values(i))[0])
+    num = Counter(gtime_list)
+    return dict(num)
 
 if __name__ == '__main__':
     add_rtime()
