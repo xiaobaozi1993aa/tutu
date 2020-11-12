@@ -16,6 +16,7 @@ import xlrd
 from Tool.get_rtime import add_errnum,add_gtime
 from gevent import pywsgi
 from pyecharts.globals import ThemeType
+
 gtime_list,gtime_num = add_gtime()
 errnum,portnum,runnum,errnum_list = add_errnum()                #依次为报错总数，接口总数，运行次数,报错字典数据
 data = xlrd.open_workbook(r'%s' % expath)
@@ -167,6 +168,7 @@ def get_bar_chart():
 def get_bar_chart1():
     c = bar_base1()
     return c.dump_options_with_quotes()
+
 if __name__ == "__main__":
     server = pywsgi.WSGIServer(('0.0.0.0', 5001), app)
     server.serve_forever()

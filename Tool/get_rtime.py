@@ -43,13 +43,19 @@ def add_rtime():
     except Exception as e:
         logger.error(e)
 
+'''
+全部接口总数
+总报错接口数
+接口运行次数
+'''
+
 def add_errnum():
     linelist = []
     errlist = []
     alllist = []
     try:
         subdir = os.listdir(path)
-        for f in subdir: # 遍历文件夹下的文件
+        for f in subdir:            # 遍历文件夹下的文件
             text = open(path+f, 'r', encoding='utf-8')
             for lines in text.readlines():
                 lines = lines.replace("\n", "").split(",")
@@ -67,14 +73,14 @@ def add_errnum():
         logger.error(e)
 
 def add_gtime():
-    gtime_list = []
+    gtime_list = []         # 超时列表
     xls = xlrd.open_workbook(expath)
     a = xls.sheets()[0]
     for i in range(1,11):
         glist = (a.col_values(i))[1::]
         new_glist = [i for i in glist if i != '']
         for ii in new_glist:
-            if float(ii) >= 0.1:
+            if float(ii) >= 0.1:            # 超时接口时间定义
                 gtime_list.append((a.col_values(i))[0])
     num = Counter(gtime_list)
     logger.info('超时数据统计完毕,共:{}个'.format(len(gtime_list)))
