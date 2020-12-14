@@ -19,15 +19,15 @@ logger = MeiyinLog().get_log()
 if __name__ == '__main__':
     suite = unittest.TestSuite()
     suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.test_login'))                        #登录
-    # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_sign'))                  #签到
-    # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_person'))                #更改姓名
-    # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_getmessage'))            #获取信息列表
-    # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_search'))                #搜索/查看商品
-    # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_code'))                  #验证码验证
-    # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Money.test_getmoney'))               #查询余额/兔币等
+    suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_sign'))                  #签到
+    suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_person'))                #更改姓名
+    suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_getmessage'))            #获取信息列表
+    suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_search'))                #搜索/查看商品
+    suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Person.test_code'))                  #验证码验证
+    suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Money.test_getmoney'))               #查询余额/兔币等
     suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Picture.test_creat_picture'))        #创建相册
     suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Picture.test_delete_picture'))       #删除相册
-    # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Address.test_addres'))               #添加地址
+    suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Address.test_addres'))               #添加地址
     # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Address.test_get_addid'))            #获取地址ID
     # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Order.test_creatorder'))             #创建订单ID
     # suite.addTest(unittest.TestLoader().loadTestsFromName('Test_Case.Order.test_buy_order'))              #创建支付ID
@@ -54,7 +54,7 @@ if __name__ == '__main__':
     logger.info('接口运行完毕')
     from Tool.get_rtime import add_rtime
     add_rtime()
-    from rtime_demo import app
-    logger.info('flask服务启动中。。。')
-    server = pywsgi.WSGIServer(('0.0.0.0', 5001), app)
-    server.serve_forever()
+    # from rtime_demo import app
+    # logger.info('flask服务启动中。。。')
+    # server = pywsgi.WSGIServer(('0.0.0.0', 5001), app)
+    # server.serve_forever()

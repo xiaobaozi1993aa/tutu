@@ -7,8 +7,64 @@
     <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
     <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/china.js"></script>
+        <style type="text/css">
+            /*
+            1、normal:默认值。定义标准的字符。
+            2、bold:定义粗体字符。
+            3、bolder:定义更粗的字符。
+            4、lighter:定义更细的字符。
+            5、数字:|100|200|300|400|500|600|700|800|900定义由粗到细的字符。400 等同于 normal，而 700 等同于 bold。
+            6、inherit:规定从父元素继承字体的粗细。
+            */
+            #time{
+                font-weight:bold;
+                color: rgb(255, 140, 82);
+                border: 1.5px soLid rgba(58, 58, 221, 0);
+                width: 200px;
+                margin: 5px auto;
+                text-align: center;
+            }
+        </style>
 </head>
+<!--<body bgcolor="#000000">    &lt;!&ndash; 背景颜色 &ndash;&gt;-->
 <body>
+    <div id="time" style="width: 202px; height: 44px; position: absolute; top: 380px; left: 1550px;;"></div>
+    <script type="text/javascript">
+        var add=setInterval("getTime()",1000);
+        //stop()这个函数主要是清除设置的定时器
+        function stop() {
+            clearInterval(add);
+        }
+        //这个函数主要是获取时间然后写入div中
+        function getTime() {
+            var date=new Date().toLocaleString();//创建date对象，获取时间
+            switch(new Date().getDay()){
+                case 1:
+                    date="星期一" + "<br>" + date;
+                    break;
+                case 2:
+                    date="星期二" + "<br>" + date;
+                    break;
+                case 3:
+                    date="星期三" + "<br>" + date;
+                    break;
+                case 4:
+                    date="星期四" + "<br>" + date;
+                    break;
+                case 5:
+                    date="星期五" + "<br>" + date;
+                    break;
+                case 6:
+                    date="星期六" + "<br>" + date;
+                    break;
+                case 7:
+                    date="星期日" + "<br>" + date;
+                    break;
+            }
+            var id1=document.getElementById("time");//通过div标签的id多去div标签
+            id1.innerHTML=date;//将时间通过innerHTML属性写入div标签中
+        }
+    </script>
     <div id="1" style="width:1500px; height:600px;position:absolute;top:00px;left:-100px"></div>
     <script>
         var chart1 = echarts.init(document.getElementById('1'), 'white', {renderer: 'canvas'});
@@ -31,7 +87,7 @@
             });
         }
     </script>
-    <div id="2" style="width:440px; height:280px;position:absolute;top:00px;left:1400px"></div>
+    <div id="2" style="width:480px; height:380px;position:absolute;top:00px;left:1400px"></div>
     <script>
         var chart2 = echarts.init(document.getElementById('2'), 'white', {renderer: 'canvas'});
 

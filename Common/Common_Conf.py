@@ -7,12 +7,12 @@
 @time:2020年8月28日
 '''
 from functools import wraps
-import datetime
+import shutil
 import datetime, os, time
 
 
-#excel路径
-expath = "H:\\美印\\tt_time\\time.xls"
+#excel初始路径
+start_expath = "H:\\美印\\tt_time\\time.xls"
 
 #日志路径
 logpath = "H:\\美印\\tt_log\\"
@@ -32,17 +32,22 @@ def print_func(func):
         return test_func
     return start_pr
 
+
+
 def get_log_time():
     t_date=datetime.date.today()
     week_day = t_date.strftime("%w")
     name =  time.strftime("%Y_%m_%d")
     path = "H:\\美印\\tt_log\\%s\\" % name
     isExists = os.path.exists(path)
-    if int(week_day) == 6:
+    if int(week_day) == 1:
         if not isExists:
             os.makedirs(path)
+            end_path = path + 'time.xls'
+            shutil.copyfile(start_expath, end_path)
+            return path
         else:
-            pass
+            return path
     else:
         lists = os.listdir(logpath)
         lists.sort(key=lambda fn: os.path.getmtime(logpath + "\\" + fn))
@@ -50,6 +55,8 @@ def get_log_time():
         return  file_new+'\\'
 
 path = get_log_time()
+end_path = str(path) + 'time.xls'
+
 # 测试
 ceshi_host = 'https://m-dev.meiyintutu.com'
 # 生产

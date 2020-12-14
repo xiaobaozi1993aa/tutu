@@ -8,7 +8,7 @@
 '''
 import xlrd
 from xlutils.copy import copy
-from Common.Common_Conf import expath
+from Common.Common_Conf import end_path
 
 
 # #打开文件
@@ -22,15 +22,17 @@ from Common.Common_Conf import expath
 # #获取行数
 # c = a.nrows
 # print(b,c)
+# col_values(i) 整列数据
+# row_values(i) 整行数据
 
 def get_xls(i):
-    xls = xlrd.open_workbook(r'%s' % expath, formatting_info=True)
+    xls = xlrd.open_workbook(r'%s' % end_path, formatting_info=True)
     xlsc = copy(xls)
     shtc = xlsc.get_sheet(i)
     return xlsc,shtc
 
 def get_nrows(i):
-    xls = xlrd.open_workbook(r'%s' % expath)
+    xls = xlrd.open_workbook(r'%s' % end_path)
     a = xls.sheets()[i]
     number = a.nrows
     return number
